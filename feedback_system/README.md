@@ -63,6 +63,23 @@ It also creates three sample faculty records (`F001`–`F003`) and two active fe
 
 Feedback submissions are unique per student, faculty member, and feedback form. Admins can compare overall, teaching-clarity, communication, and punctuality ratings on the Responses page.
 
+## Deploy to Render
+
+The repository includes a Render Blueprint at [`render.yaml`](./render.yaml). To deploy:
+
+1. Push the repository to GitHub and sign in to [Render](https://render.com/).
+2. Choose **New → Blueprint**, select `Chyaitanya/school_management`, and confirm the resources from `render.yaml`.
+3. Review Render's current pricing before creating the PostgreSQL database. The Blueprint uses a persistent PostgreSQL plan; the web service uses the free plan and may sleep when idle.
+4. After the first deploy, open the web service's **Shell** and create an admin login with `python manage.py createsuperuser`.
+5. Add SMTP credentials in the service's **Environment** settings to enable password reset emails: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL`. Use an email provider's SMTP credentials, not your personal email password.
+6. Add students, faculty, and feedback forms from the admin interface. The local SQLite database is not uploaded or copied; run `python manage.py seed_demo` from the Render shell only if you want fictional sample records.
+
+The Blueprint configures a generated `SECRET_KEY`, PostgreSQL, HTTPS-aware security settings, static assets, and database migrations. Keep `DEBUG` disabled in production. Do not commit credentials or a local database.
+
+### Environment variables
+
+Render supplies `DATABASE_URL` and `RENDER_EXTERNAL_HOSTNAME`. The Blueprint generates `SECRET_KEY` and disables `DEBUG`. Configure the SMTP variables listed above in Render to deliver password reset emails. Locally, SQLite and console email remain the defaults.
+
 ## Windows PowerShell
 
 ```powershell
@@ -79,6 +96,6 @@ py manage.py runserver
 - **Admin account:** created securely by you with `python manage.py createsuperuser`. There is no hard-coded admin password.
 - **Student account:** students register only after an admin has added their UID to the Student table. The UID is the username for student login.
 - **Existing database:** if you already have a database from the previous version, keep it and run `python manage.py migrate` to add the student-account table.
-- SQLite is used by default, so no external database setup is required.
-- Before public deployment, set `DEBUG = False`, use a strong environment-based `SECRET_KEY`, configure `ALLOWED_HOSTS`, and use HTTPS.
+- SQLite is used by default for local development; the Render Blueprint configures PostgreSQL for deployment.
+- The Render Blueprint disables debug mode, generates a secret key, and configures HTTPS-aware settings. Keep production credentials in Render environment variables, not in source control.
 - Use sample data for public demos rather than real student personal information.
