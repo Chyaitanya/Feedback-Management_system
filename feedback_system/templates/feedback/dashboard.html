@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<section class="hero admin-hero">
+ <div><div class="eyebrow">CAMPUSPULSE CONTROL ROOM</div><h1>See the pulse.<br><span>Shape the future.</span></h1><p>All your student feedback activity, faculty insights, and campus records in one place.</p><a class="button" href="/admin/">Manage campus data <b>↗</b></a></div>
+ <div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-star">✦</div><div class="hero-note">Campus<br>in sync<span>♥</span></div><div class="mini-tag">ADMIN / 2026</div></div>
+</section>
+<section class="stats">
+ <article class="stat-card lilac"><div>👩‍🎓</div><small>STUDENT RECORDS</small><strong>{{ stats.students }}</strong></article>
+ <article class="stat-card mint"><div>🔐</div><small>STUDENT LOGINS</small><strong>{{ stats.accounts }}</strong></article>
+ <article class="stat-card peach"><div>🧑‍🏫</div><small>FACULTY MEMBERS</small><strong>{{ stats.faculty }}</strong></article>
+ <article class="stat-card yellow"><div>💬</div><small>FEEDBACK RECEIVED</small><strong>{{ stats.responses }}</strong></article>
+ <article class="stat-card sky"><div>⭐</div><small>AVERAGE RATING</small><strong>{% if stats.average %}{{ stats.average|floatformat:1 }}{% else %}—{% endif %}<em>/5</em></strong></article>
+</section>
+<section class="section-head"><div><div class="eyebrow">THE LATEST</div><h2>Recent feedback</h2></div><a class="text-link" href="{% url 'feedback_list' %}">View all →</a></section>
+<div class="panel">
+ {% for item in recent %}<div class="feedback-row"><div class="avatar">{{ item.faculty.faculty_name|first|upper }}</div><div class="feedback-copy"><b>{{ item.faculty.faculty_name }}</b><small>{{ item.student.uid }} · {{ item.feedback_form.form_title }}</small><p>{{ item.feedback_message|default:"Rating submitted without a comment."|truncatechars:100 }}</p></div><div class="rating">★ {{ item.rating }}/5</div></div>
+ {% empty %}<div class="empty"><span>✦</span><h3>Your dashboard starts here</h3><p>Add student records, faculty, and an active feedback form. Students can then register and submit feedback.</p><a class="button dark" href="/admin/">Open admin panel ↗</a></div>{% endfor %}
+</div>
+<section class="bottom-banner"><div><b>Ready to set up your feedback cycle?</b><p>Add records, activate a form, and invite students to create their login.</p></div><a href="/admin/">Manage records ↗</a></section>
+{% endblock %}

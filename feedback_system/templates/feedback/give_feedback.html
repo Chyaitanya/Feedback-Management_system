@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Give Feedback{% endblock %}
+{% block content %}
+<div class="page-heading"><div class="eyebrow">YOUR VOICE, YOUR IMPACT</div><h1>Feedback that <span>moves us forward.</span></h1><p>Signed in as <b>{{ student.uid }}</b>. Your student identity is attached automatically.</p></div>
+<form method="post" class="form-panel">{% csrf_token %}
+ {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+ <div class="form-section-title"><span>01</span><div><b>Who are you reviewing?</b><small>Choose any faculty member and an active feedback form. You can review other faculty separately.</small></div></div>
+ <div class="form-grid">
+  {% for field in form %}{% if field.name == "faculty" or field.name == "feedback_form" %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endif %}{% endfor %}
+ </div>
+ <div class="form-section-title space-top"><span>02</span><div><b>Rate the experience</b><small>1 = Needs improvement · 5 = Excellent</small></div></div>
+ <div class="form-grid ratings">
+  {% for field in form %}{% if field.name == "rating" or field.name == "teaching_clarity" or field.name == "communication" or field.name == "punctuality" %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endif %}{% endfor %}
+ </div>
+ <div class="field message-field"><label for="{{ form.feedback_message.id_for_label }}">Your comments (optional)</label>{{ form.feedback_message }}{% for error in form.feedback_message.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>
+ <div class="form-foot"><span>🔒 Your Student UID is attached automatically and cannot be changed here.</span><button class="button" type="submit">Submit feedback <b>↗</b></button></div>
+</form>
+{% endblock %}

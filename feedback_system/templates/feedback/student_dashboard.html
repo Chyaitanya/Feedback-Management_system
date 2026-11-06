@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<section class="student-welcome">
+  <div><div class="eyebrow">YOUR PERSONAL CAMPUSPULSE</div><h1>Hey, <span>{{ student.uid }}.</span></h1><p>{{ student.class_name }} · {{ student.subject }}</p><div class="welcome-pill">✦ Your feedback helps your campus grow</div></div>
+  <div class="student-welcome-art">💜<span>✦</span></div>
+</section>
+<section class="stats student-stats">
+ <article class="stat-card lilac"><div>📝</div><small>YOUR SUBMISSIONS</small><strong>{{ feedback_count }}</strong></article>
+ <article class="stat-card mint"><div>🧑‍🏫</div><small>FACULTY MEMBERS</small><strong>{{ faculty_count }}</strong></article>
+ <article class="stat-card peach"><div>📣</div><small>ACTIVE FEEDBACK FORMS</small><strong>{{ active_forms }}</strong></article>
+</section>
+<section class="student-cta"><div><div class="eyebrow">GOT SOMETHING TO SAY?</div><h2>Your feedback can spark a change.</h2><p>Rate your learning experience and share a respectful suggestion.</p></div><a class="button" href="{% url 'give_feedback' %}">Give feedback <b>↗</b></a></section>
+<section class="section-head student-section-head"><div><div class="eyebrow">YOUR FEEDBACK, YOUR CHOICE</div><h2>Choose any faculty to review</h2></div></section>
+<div class="faculty-grid">{% for person in faculty_members %}
+ <article class="faculty-card"><div class="faculty-avatar">{{ person.faculty_name|first|upper }}</div><div class="faculty-id">{{ person.faculty_id }}</div><h3>{{ person.faculty_name }}</h3><a class="button" href="{% url 'give_feedback' %}?faculty={{ person.faculty_id }}">Review this faculty <b>↗</b></a></article>
+ {% empty %}<div class="panel empty"><h3>No faculty members yet</h3><p>Your administrator needs to add faculty before you can submit feedback.</p></div>{% endfor %}</div>
+<section class="section-head student-section-head"><div><div class="eyebrow">YOUR ACTIVITY</div><h2>My recent feedback</h2></div><span class="private-label">🔒 Only you can see this</span></section>
+<div class="panel">
+ {% for item in own_feedback %}
+ <div class="feedback-row"><div class="avatar">{{ item.faculty.faculty_name|first|upper }}</div><div class="feedback-copy"><b>{{ item.faculty.faculty_name }}</b><small>{{ item.feedback_form.form_title }} · {{ item.feedback_date|date:"d M Y" }}</small><p>{{ item.feedback_message|default:"No comment added."|truncatechars:100 }}</p></div><div class="rating">★ {{ item.rating }}/5</div></div>
+ {% empty %}<div class="empty"><span>✦</span><h3>Your feedback journey starts here</h3><p>You have not submitted feedback yet. Your first response will appear here.</p><a class="button dark" href="{% url 'give_feedback' %}">Share first feedback ↗</a></div>{% endfor %}
+</div>
+{% endblock %}

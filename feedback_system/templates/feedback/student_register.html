@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Create Student Account{% endblock %}
+{% block content %}
+<section class="auth-layout register-layout">
+  <div class="auth-aside student-aside register-aside"><div class="auth-kicker">CAMPUSPULSE / JOIN THE COMMUNITY</div><div class="auth-emoji">🌈</div><h1>Your voice.<br><span>Your campus.</span></h1><p>Create your student login using the Student UID already added by your college admin.</p><div class="aside-note">💡 One Student UID = one student login.</div></div>
+  <div class="auth-card register-card"><div class="auth-badge">🚀 LET'S GET STARTED</div><h2>Create account</h2><p class="auth-subtitle">Your UID connects your login to your student record.</p>
+    <form method="post" novalidate>{% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}<div class="field auth-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endfor %}
+      <button class="button auth-submit" type="submit">Create my account <b>↗</b></button>
+    </form>
+    <div class="auth-switch">Already registered? <a href="{% url 'student_login' %}">Log in</a></div>
+    <div class="registration-help">Your Student UID must first be added by an admin. Contact your college admin if it is not listed.</div>
+  </div>
+</section>
+{% endblock %}

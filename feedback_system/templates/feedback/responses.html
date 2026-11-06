@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Responses{% endblock %}
+{% block content %}
+<div class="page-heading"><div class="eyebrow">STUDENT VOICES</div><h1>Feedback <span>wall.</span></h1><p>Submitted feedback records from the database.</p></div>
+<div class="panel table-panel"><div class="data-table-wrap"><table><thead><tr><th>Student UID</th><th>Faculty</th><th>Form</th><th>Overall</th><th>Teaching clarity</th><th>Communication</th><th>Punctuality</th><th>Comment</th><th>Date</th></tr></thead><tbody>
+{% for item in responses %}<tr><td><b>{{ item.student.uid }}</b></td><td>{{ item.faculty.faculty_name }}</td><td>{{ item.feedback_form.form_title }}</td><td><span class="rating">★ {{ item.rating }}/5</span></td><td>★ {{ item.teaching_clarity }}/5</td><td>★ {{ item.communication }}/5</td><td>★ {{ item.punctuality }}/5</td><td>{{ item.feedback_message|default:"—"|truncatechars:70 }}</td><td>{{ item.feedback_date|date:"d M Y" }}</td></tr>{% empty %}<tr><td colspan="9" class="empty-cell">No responses yet. Be the first to share feedback.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

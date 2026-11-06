@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Faculty{% endblock %}
+{% block content %}
+<div class="page-heading"><div class="eyebrow">MEET THE PEOPLE WHO INSPIRE</div><h1>Our <span>faculty.</span></h1><p>Faculty profiles and feedback snapshots.</p></div>
+<div class="faculty-grid">{% for person in faculty %}
+ <article class="faculty-card"><div class="faculty-avatar">{{ person.faculty_name|first|upper }}</div><div class="faculty-id">{{ person.faculty_id }}</div><h3>{{ person.faculty_name }}</h3><p>{{ person.email_id|default:"Email not added" }}</p><div class="faculty-meta"><span>💬 {{ person.response_count }} responses</span><b>★ {% if person.avg_rating %}{{ person.avg_rating|floatformat:1 }}{% else %}—{% endif %}</b></div></article>
+ {% empty %}<div class="panel empty"><h3>No faculty added yet</h3><p>Add faculty records through the admin panel.</p><a href="/admin/" class="button dark">Open admin ↗</a></div>{% endfor %}</div>
+{% endblock %}

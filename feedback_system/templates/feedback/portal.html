@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<section class="portal-hero">
+  <div class="portal-copy">
+    <div class="eyebrow">YOUR CAMPUS. YOUR VOICE. YOUR IMPACT.</div>
+    <h1>Make feedback<br><span>feel like progress.</span></h1>
+    <p>CampusPulse is your colorful corner to share honest feedback, celebrate great teaching, and make every classroom better.</p>
+    <div class="portal-actions"><a class="button" href="{% url 'student_login' %}">I'm a student <b>↗</b></a><a class="button button-glass" href="{% url 'admin_login' %}">I'm an admin <b>↗</b></a></div>
+    <div class="portal-trust"><span>✦</span> A better campus starts with one honest voice.</div>
+  </div>
+  <div class="portal-art" aria-hidden="true">
+    <div class="floating-card card-purple"><span>💬</span><b>Your voice</b><small>MATTERS HERE</small></div>
+    <div class="floating-card card-yellow"><span>⭐</span><b>5.0 / 5</b><small>GOOD VIBES ONLY</small></div>
+    <div class="portal-orb">✦</div><div class="portal-spark spark-one">✳</div><div class="portal-spark spark-two">✦</div>
+  </div>
+</section>
+<section class="portal-bottom">
+  <div><span class="feature-icon lilac">🎓</span><b>For students</b><p>Sign in with your Student UID and share feedback securely.</p><a href="{% url 'student_register' %}">Create student account →</a></div>
+  <div><span class="feature-icon mint">🛠️</span><b>For admins</b><p>Manage student records, faculty, feedback forms, and responses.</p><a href="{% url 'admin_login' %}">Go to admin login →</a></div>
+  <div><span class="feature-icon peach">🔐</span><b>Separate spaces</b><p>Student and admin accounts have different access and dashboards.</p><a href="{% url 'student_login' %}">Explore student login →</a></div>
+</section>
+{% endblock %}

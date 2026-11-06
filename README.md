@@ -23,6 +23,7 @@ school_management/
 ├── requirements.txt
 ├── school/
 ├── school_project/
+├── feedback_system/
 ├── README.md
 └── .gitignore
 ```
@@ -38,7 +39,7 @@ school_management/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Chyaitanya12/school_management.git
+git clone https://github.com/Chyaitanya/school_management.git
 cd school_management
 ```
 
@@ -119,8 +120,18 @@ This project helps develop practical experience with Python, Django, database ma
 
 **Chyaitanya**
 
-GitHub Repository: [https://github.com/Chyaitanya12/school_management](https://github.com/Chyaitanya12/school_management)
+GitHub Repository: [https://github.com/Chyaitanya/school_management](https://github.com/Chyaitanya/school_management)
 
 ## License
 
 This project is intended for educational and learning purposes.
+
+## Student & Faculty Feedback System
+
+The [`feedback_system/`](./feedback_system/) folder contains CampusPulse, a separate Django application for student feedback. It includes student registration and dashboards, faculty feedback forms, and an admin dashboard.
+
+Follow the [feedback system README](./feedback_system/README.md) for its setup instructions, demo data, and feature details. Run it from that folder; it has its own `manage.py`, dependencies, settings, and SQLite database.
+
+The SQLite database and virtual environments are intentionally excluded from Git. Create a local database with `python manage.py migrate`, then optionally load fictional examples with `python manage.py seed_demo`.
+
+GitHub hosts this project's source code; it does not run Django applications. Deploy the app to a Django-compatible hosting provider to make it available as a live website.

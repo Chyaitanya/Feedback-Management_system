@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Thank You{% endblock %}
+{% block content %}
+<div class="thank-card"><div class="thank-icon">✓</div><div class="eyebrow">RESPONSE RECEIVED</div><h1>Thanks for making<br><span>a difference.</span></h1><p>Your feedback has been saved successfully. You can review another faculty member from your dashboard.</p><a class="button" href="{% url 'student_dashboard' %}">Choose another faculty ↗</a></div>
+{% endblock %}

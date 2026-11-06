@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<section class="auth-layout admin-auth-layout">
+  <div class="auth-aside admin-aside"><div class="auth-kicker">CAMPUSPULSE / CONTROL ROOM</div><div class="auth-emoji">🛠️</div><h1>Big picture.<br><span>Better campus.</span></h1><p>Your admin space brings student records, faculty, feedback forms, and insights together.</p><div class="aside-note">⚡ Manage the details. Inspire the change.</div></div>
+  <div class="auth-card"><div class="auth-badge admin-badge">🔐 ADMIN ACCESS</div><h2>Admin login</h2><p class="auth-subtitle">Sign in with your Django staff account.</p>
+    <form method="post" novalidate>{% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}<div class="field auth-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endfor %}
+      <button class="button admin-submit" type="submit">Enter admin dashboard <b>↗</b></button>
+    </form>
+    <div class="auth-switch">Need a student account? <a href="{% url 'student_login' %}">Student login</a></div>
+    <div class="auth-switch muted-switch"><a href="/admin/">Open Django admin site</a></div>
+  </div>
+</section>
+{% endblock %}

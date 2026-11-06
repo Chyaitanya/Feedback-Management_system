@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Student Login{% endblock %}
+{% block content %}
+<section class="auth-layout">
+  <div class="auth-aside student-aside"><div class="auth-kicker">CAMPUSPULSE / STUDENT SPACE</div><div class="auth-emoji">🎓</div><h1>Hey student,<br><span>you belong here.</span></h1><p>Sign in, share your experience, and help make every lecture count.</p><div class="aside-note">✨ Your perspective can make a real difference.</div></div>
+  <div class="auth-card"><div class="auth-badge">👋 WELCOME BACK</div><h2>Student login</h2><p class="auth-subtitle">Use your Student UID and password.</p>
+    <form method="post" novalidate>{% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}<div class="field auth-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endfor %}
+      <button class="button auth-submit" type="submit">Login to student space <b>↗</b></button>
+    </form>
+    <div class="auth-switch">New here? <a href="{% url 'student_register' %}">Create your student account</a></div>
+    <div class="auth-switch muted-switch">Admin? <a href="{% url 'admin_login' %}">Use admin login</a></div>
+  </div>
+</section>
+{% endblock %}
