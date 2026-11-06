@@ -1,6 +1,6 @@
-# CampusPulse — Student & Faculty Feedback System
+# Overall Feedback System
 
-CampusPulse is a Django feedback portal with **separate student and admin logins**, private student dashboards, an admin management dashboard, and a bright, modern responsive interface.
+Overall Feedback System is a Django feedback portal with **separate student and admin logins**, private student dashboards, an admin management dashboard, and a bright, modern responsive interface.
 
 ## What was added
 

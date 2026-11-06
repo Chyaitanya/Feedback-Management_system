@@ -6,7 +6,7 @@ from django.urls import reverse
 from .models import Student, StudentAccount, Faculty, FeedbackForm, Feedback
 
 
-class CampusPulseRoleTests(TestCase):
+class OverallFeedbackSystemRoleTests(TestCase):
     def setUp(self):
         self.student = Student.objects.create(
             uid="S001", class_name="FY B.Tech", subject="Information Technology"
@@ -22,8 +22,8 @@ class CampusPulseRoleTests(TestCase):
         response = self.client.post(reverse("student_register"), {
             "student_uid": "S001",
             "email": "student@example.edu",
-            "password": "CampusPulse!2026Strong",
-            "confirm_password": "CampusPulse!2026Strong",
+            "password": "FeedbackPortal!2026Strong",
+            "confirm_password": "FeedbackPortal!2026Strong",
         })
         self.assertRedirects(response, reverse("student_dashboard"))
         user = User.objects.get(username="S001")

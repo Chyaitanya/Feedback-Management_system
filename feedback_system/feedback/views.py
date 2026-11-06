@@ -71,7 +71,7 @@ def student_register(request):
     if request.method == "POST" and form.is_valid():
         user = form.create_account()
         login(request, user, backend="django.contrib.auth.backends.ModelBackend")
-        messages.success(request, "Your student account is ready. Welcome to CampusPulse!")
+        messages.success(request, "Your student account is ready. Welcome to Overall Feedback System!")
         return redirect("student_dashboard")
     return render(request, "feedback/student_register.html", {"form": form})
 

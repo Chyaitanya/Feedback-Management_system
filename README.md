@@ -128,7 +128,7 @@ This project is intended for educational and learning purposes.
 
 ## Student & Faculty Feedback System
 
-The [`feedback_system/`](./feedback_system/) folder contains CampusPulse, a separate Django application for student feedback. It includes student registration and dashboards, faculty feedback forms, and an admin dashboard.
+The [`feedback_system/`](./feedback_system/) folder contains Overall Feedback System, a separate Django application for student feedback. It includes student registration and dashboards, faculty feedback forms, and an admin dashboard.
 
 Follow the [feedback system README](./feedback_system/README.md) for its setup instructions, demo data, and feature details. Run it from that folder; it has its own `manage.py`, dependencies, settings, and SQLite database.
 
