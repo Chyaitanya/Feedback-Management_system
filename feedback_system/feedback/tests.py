@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
@@ -28,6 +29,29 @@ class OverallFeedbackSystemRoleTests(TestCase):
         self.assertRedirects(response, reverse("student_dashboard"))
         user = User.objects.get(username="S001")
         self.assertTrue(StudentAccount.objects.filter(user=user, student=self.student).exists())
+
+    def test_student_and_admin_login_pages_link_to_password_reset(self):
+        for login_url in ("student_login", "admin_login"):
+            with self.subTest(login_url=login_url):
+                response = self.client.get(reverse(login_url))
+                self.assertContains(response, reverse("password_reset"))
+                self.assertContains(response, "Forgot password?")
+
+    def test_password_reset_sends_email_for_account(self):
+        User.objects.create_user(
+            username="campusadmin",
+            email="admin@example.edu",
+            password="OriginalPassword!2026",
+            is_staff=True,
+        )
+
+        response = self.client.post(
+            reverse("password_reset"), {"email": "admin@example.edu"}
+        )
+
+        self.assertRedirects(response, reverse("password_reset_done"))
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("/password-reset/confirm/", mail.outbox[0].body)
 
     def test_student_cannot_open_admin_dashboard(self):
         user = User.objects.create_user(username="S001", password="StudentPass!23456")
