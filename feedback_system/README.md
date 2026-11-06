@@ -65,14 +65,16 @@ Feedback submissions are unique per student, faculty member, and feedback form. 
 
 ## Deploy to Render
 
-The repository includes a Render Blueprint at [`render.yaml`](./render.yaml). To deploy:
+The repository includes a Render Blueprint at [`../render.yaml`](../render.yaml). To deploy:
 
 1. Push the repository to GitHub and sign in to [Render](https://render.com/).
-2. Choose **New → Blueprint**, select `Chyaitanya/school_management`, and confirm the resources from `render.yaml`.
-3. Review Render's current pricing before creating the PostgreSQL database. The Blueprint uses a persistent PostgreSQL plan; the web service uses the free plan and may sleep when idle.
-4. After the first deploy, open the web service's **Shell** and create an admin login with `python manage.py createsuperuser`.
-5. Add SMTP credentials in the service's **Environment** settings to enable password reset emails: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL`. Use an email provider's SMTP credentials, not your personal email password.
-6. Add students, faculty, and feedback forms from the admin interface. The local SQLite database is not uploaded or copied; run `python manage.py seed_demo` from the Render shell only if you want fictional sample records.
+2. For the existing web service, open **Settings** and set **Root Directory** to `feedback_system`, **Build Command** to `pip install -r requirements.txt && python manage.py collectstatic --no-input`, and **Start Command** to `python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT`. The failed `gunicorn app:app` command points to the wrong application.
+3. Set `PYTHON_VERSION` to `3.12.8` in the service's **Environment** settings. The root-level Blueprint specifies this version as well.
+4. To create resources from scratch instead, choose **New → Blueprint**, select `Chyaitanya/school_management`, and review `render.yaml` at the repository root.
+5. Review Render's current pricing before creating the PostgreSQL database. The Blueprint uses a persistent PostgreSQL plan; the web service uses the free plan and may sleep when idle.
+6. After the first deploy, open the web service's **Shell** and create an admin login with `python manage.py createsuperuser`.
+7. Add SMTP credentials in the service's **Environment** settings to enable password reset emails: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL`. Use an email provider's SMTP credentials, not your personal email password.
+8. Add students, faculty, and feedback forms from the admin interface. The local SQLite database is not uploaded or copied; run `python manage.py seed_demo` from the Render shell only if you want fictional sample records.
 
 The Blueprint configures a generated `SECRET_KEY`, PostgreSQL, HTTPS-aware security settings, static assets, and database migrations. Keep `DEBUG` disabled in production. Do not commit credentials or a local database.
 

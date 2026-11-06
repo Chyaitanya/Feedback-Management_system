@@ -134,6 +134,6 @@ Follow the [feedback system README](./feedback_system/README.md) for its setup i
 
 The SQLite database and virtual environments are intentionally excluded from Git. Create a local database with `python manage.py migrate`, then optionally load fictional examples with `python manage.py seed_demo`.
 
-To deploy the feedback system on Render, create a Blueprint from [`feedback_system/render.yaml`](./feedback_system/render.yaml) and follow the [deployment guide](./feedback_system/README.md#deploy-to-render). Review the PostgreSQL plan's current price before creating resources, and add SMTP credentials to enable password reset emails.
+To deploy the feedback system on Render, follow the [deployment guide](./feedback_system/README.md#deploy-to-render). The root-level [`render.yaml`](./render.yaml) Blueprint points Render to `feedback_system/`; review the PostgreSQL plan's current price before creating resources, and add SMTP credentials to enable password reset emails.
 
 GitHub hosts this project's source code; it does not run Django applications.

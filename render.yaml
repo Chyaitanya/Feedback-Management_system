@@ -1,0 +1,40 @@
+databases:
+  - name: overall-feedback-db
+    databaseName: overall_feedback
+    user: overall_feedback
+    plan: basic-256mb
+    region: singapore
+
+services:
+  - type: web
+    name: overall-feedback-system
+    runtime: python
+    plan: free
+    region: singapore
+    rootDir: feedback_system
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input
+    startCommand: python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: overall-feedback-db
+          property: connectionString
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: EMAIL_USE_TLS
+        value: "true"
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
