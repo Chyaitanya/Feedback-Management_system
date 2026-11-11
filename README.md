@@ -1,11 +1,9 @@
 # Feedback Management System
 
-A Django-based education platform containing a school management application and a separate student-and-faculty feedback portal. The feedback system provides secure student accounts, private dashboards, faculty evaluations, and admin tools for managing feedback and campus data.
-
+A Django-based education repository with a school management application and a separate student-and-faculty feedback portal. The feedback app provides secure student accounts, private dashboards, faculty evaluations, and admin tools for feedback and campus data.
 ## Project Overview
 
-This repository includes the Feedback management application at the root and the Overall Feedback System in [feedback_system/](./feedback_system/). The feedback app supports student registration and private feedback submissions; administrators manage students, faculty, feedback forms, and responses. See the [feedback system README](./feedback_system/README.md) for its setup, demo data, and deployment instructions.
-
+This repository contains the root school management system and the separate Overall Feedback System in [feedback_system/](./feedback_system/). The feedback app supports student registration and private feedback submissions; administrators manage students, faculty, feedback forms, and responses. See the [feedback system README](./feedback_system/README.md) for setup, demo data, and deployment instructions.
 ## Technologies Used
 
 - Python and Django
