@@ -1,16 +1,16 @@
 # Feedback Management System
 
-A web-based School Management System developed using Python and Django. This project is designed for local development and administration through Django's built-in admin interface.
+A Django-based education platform containing a school management application and a separate student-and-faculty feedback portal. The feedback system provides secure student accounts, private dashboards, faculty evaluations, and admin tools for managing feedback and campus data.
 
 ## Project Overview
 
-The School Management System provides a foundation for managing school-related data using Django and SQLite. The application runs locally on your computer through Django's development server.
+This repository includes the Feedback management application at the root and the Overall Feedback System in [feedback_system/](./feedback_system/). The feedback app supports student registration and private feedback submissions; administrators manage students, faculty, feedback forms, and responses. See the [feedback system README](./feedback_system/README.md) for its setup, demo data, and deployment instructions.
 
 ## Technologies Used
 
-- Python
-- Django
-- SQLite
+- Python and Django
+- SQLite for local development
+- PostgreSQL for the Render deployment
 - Django Administration
 - Git and GitHub
 - Visual Studio Code
@@ -18,7 +18,7 @@ The School Management System provides a foundation for managing school-related d
 ## Project Structure
 
 ```text
-school_management/
+Feedback-Management_system/
 ├── manage.py
 ├── requirements.txt
 ├── school/
@@ -39,8 +39,8 @@ school_management/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Chyaitanya/school_management.git
-cd school_management
+git clone https://github.com/Chyaitanya/Feedback-Management_system.git
+cd Feedback-Management_system
 ```
 
 ### 2. Create a virtual environment
@@ -99,28 +99,28 @@ Log in using the administrator credentials created in Step 6.
 
 ## Database
 
-This project uses SQLite as its configured database. Django manages database tables through migrations.
+The root school management application uses SQLite locally. The separate feedback application also uses SQLite locally and is configured for PostgreSQL on Render. Django manages database tables through migrations.
 
 ## Running the Project
 
-Whenever you want to run the project locally:
+Whenever you want to run the root school management application locally:
 
-1. Open the project folder in VS Code.
+1. Open the repository folder in VS Code.
 2. Activate the virtual environment.
 3. Run `python manage.py runserver`.
 4. Open [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) in your browser.
 
-Stop the development server by pressing `Control + C` in the terminal.
+To run the feedback application, follow its [README](./feedback_system/README.md) from the `feedback_system/` folder. Stop a development server by pressing `Control + C` in the terminal.
 
 ## Project Purpose
 
-This project helps develop practical experience with Python, Django, database management, and web application administration.
+This project demonstrates practical use of Python, Django, database migrations, school administration, and student/faculty feedback workflows.
 
 ## Author
 
 **Chyaitanya**
 
-GitHub Repository: [https://github.com/Chyaitanya/school_management](https://github.com/Chyaitanya/school_management)
+GitHub Repository: [https://github.com/Chyaitanya/Feedback-Management_system](https://github.com/Chyaitanya/Feedback-Management_system)
 
 ## License
 
@@ -128,7 +128,7 @@ This project is intended for educational and learning purposes.
 
 ## Student & Faculty Feedback System
 
-The [`feedback_system/`](./feedback_system/) folder contains Overall Feedback System, a separate Django application for student feedback. It includes student registration and dashboards, faculty feedback forms, and an admin dashboard.
+The [`feedback_system/`](./feedback_system/) folder contains the Overall Feedback System, a separate Django application for student feedback. It includes student registration and dashboards, faculty feedback forms, and an admin dashboard.
 
 Follow the [feedback system README](./feedback_system/README.md) for its setup instructions, demo data, and feature details. Run it from that folder; it has its own `manage.py`, dependencies, settings, and SQLite database.
 
