@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#7557f2">
-  <title>{% block title %}Overall Feedback System{% endblock %} | Overall Feedback System</title>
+  <title>{% block title %}Feedback Management System{% endblock %} | Feedback Management System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="{% url 'portal' %}"><span class="brand-icon">✦</span> Overall <span>Feedback System</span></a>
+  <a class="brand" href="{% url 'portal' %}"><span class="brand-icon">✦</span> Feedback <span>Management System</span></a>
   <nav>
     {% if user.is_authenticated and user.is_staff %}
       <a href="{% url 'dashboard' %}">Admin dashboard</a><a href="{% url 'faculty_list' %}">Faculty</a><a href="{% url 'feedback_list' %}">Responses</a><a href="/admin/">Manage data ↗</a>
@@ -29,5 +29,5 @@
   {% if messages %}{% for message in messages %}<div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>{% endfor %}{% endif %}
   {% block content %}{% endblock %}
 </main>
-<footer>Made for better classrooms <span>✦</span> Overall Feedback System</footer>
+<footer>Made for better classrooms <span>✦</span> Feedback Management System</footer>
 </body></html>
