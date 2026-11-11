@@ -1,4 +1,4 @@
-# School Management System
+# Feedback Management System
 
 A web-based School Management System developed using Python and Django. This project is designed for local development and administration through Django's built-in admin interface.
 
